@@ -1,4 +1,4 @@
-
+import { useRef, useState } from 'react';
 import {
   Container,
   Header,
@@ -20,15 +20,27 @@ import {
 } from './styles';
 import Button from '../Button';
 
-function PostCard({post}) {
+function PostCard({ post }) {
+  const videoRef = useRef();
+  const [running, setRunning] = useState(false);
+
+  const toggleAction = () => {
+    if (videoRef?.current != null) {
+      if (!running) videoRef.current.play();
+      else videoRef.current.pause();
+
+      setRunning(!running);
+    }
+  };
+
   return (
     <Container>
       <Header>
         <PersonContainer>
-          <Avatar></Avatar>
+          <Avatar src={post?.author?.avatar}></Avatar>
           <Info>
             <Author>
-              {post?.author.username}
+              {post?.author?.username}
               <span>{post?.author?.name}</span>
             </Author>
             <Description>
@@ -40,21 +52,29 @@ function PostCard({post}) {
           </Info>
         </PersonContainer>
         <ButtonContainer>
-          <Button fontSize={14} outlined>Seguir</Button>
+          <Button fontSize={14} outlined>
+            Seguir
+          </Button>
         </ButtonContainer>
       </Header>
       <Content>
-        <Song></Song>
+        <Song>
+          <img src='/images/songIcon.svg'></img>
+          <a>{post?.songName}</a>
+        </Song>
         <VideoContainer>
           <Video
+            ref={videoRef}
             src={post?.videoUrl}
             webkit-playsinline='true'
             playsinline=''
             loop='true'
             preload='metadata'
           ></Video>
-          <ActionsContainer>
-            <PlayerIcon src='/images/playIcon.svg'></PlayerIcon>
+          <ActionsContainer onClick={toggleAction}>
+            <PlayerIcon
+              src={running ? '/images/pauseIcon.svg' : '/images/playIcon.svg'}
+            ></PlayerIcon>
           </ActionsContainer>
         </VideoContainer>
       </Content>
