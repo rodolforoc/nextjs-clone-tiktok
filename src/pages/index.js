@@ -1,10 +1,11 @@
 import Layout from '../components/layout';
 import Feed from '../components/Feed';
+import Suggestions from '../components/Suggestions';
 
 function Index({ posts=[] }) {
     return <Layout>
         <Feed posts={posts}></Feed>
-        {/* <Suggestions></Suggestions> */}
+        <Suggestions></Suggestions>
     </Layout>;
 }
 
