@@ -68,7 +68,7 @@ function PostCard({ post }) {
             src={post?.videoUrl}
             webkit-playsinline='true'
             playsinline=''
-            loop='true'
+            loop={true}
             preload='metadata'
           ></Video>
           <ActionsContainer onClick={toggleAction}>
