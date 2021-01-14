@@ -1,4 +1,4 @@
-import Layout from '../components/Layout';
+import Layout from '../components/layout';
 import Feed from '../components/Feed';
 import Suggestions from '../components/Suggestions';
 import { openDB } from '../lib/openDB';
